@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="loadDataD();">
+  <script type="text/javascript" language="javascript" >
+    
+
+        function loadDataD() {
+
+            HideWin();
+            ShowWin();
+            FB.api('/me', 
+              {fields: "name,gender,email,birthday,education,picture.width(150).height(150),permissions"}, 
+              function(response) {
+              console.log("Message", response);
+              $("#name").append(response.name);
+              // //       $("#user-id").append(response.id);
+              $("#gender").append(response.gender);
+              $("#birthday").append(response.birthday);
+              $("#mail").append(response.email);
+                    // FB.api('/me/photos', function (response) {
+                    //     console.log(response.data.length);
+                    // })
+              //$("#posts").append(response.posts[0].data.message);
+            });
+          }
+
+        function HideWin() {
+          $('#ShowButton').hide();
+        }
+
+        function ShowWin() {
+          $('#Table').show();
+        }
+
+
+  </script>
+<div class="container">
+<button onclick="loadDataD();" id="ShowButton">Data</button>
+  <table class="table"  id="Table">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td id="name"></td>
+      </tr>
+      <tr>
+        <td>Birthday</td>
+        <td id="birthday"></td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td id="gender"></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td id="mail"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
